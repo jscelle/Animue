@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    private let networkManager = NetworkManagerImpl<AnimeTarget>()
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -16,6 +19,20 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
+        .onAppear {
+            Task {
+                do {
+                    let object: PageResult = try await networkManager.request(
+                        .fetchAnime(title: "demon", page: 2)
+                    )
+                    print(object)
+                    
+                    
+                } catch {
+                    print(error)
+                }
+            }
+        }
     }
 }
 

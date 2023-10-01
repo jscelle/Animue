@@ -1,0 +1,582 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A425DBD12AC9E47600A3D921 /* AnimueApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A425DBD02AC9E47600A3D921 /* AnimueApp.swift */; };
+		A425DBD32AC9E47600A3D921 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A425DBD22AC9E47600A3D921 /* ContentView.swift */; };
+		A425DBD52AC9E47800A3D921 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A425DBD42AC9E47800A3D921 /* Assets.xcassets */; };
+		A425DBD82AC9E47800A3D921 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A425DBD72AC9E47800A3D921 /* Preview Assets.xcassets */; };
+		A425DBE02AC9E80000A3D921 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = A425DBDF2AC9E80000A3D921 /* ComposableArchitecture */; };
+		A43BDA202AC9F1EC004671AB /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BDA1F2AC9F1EC004671AB /* NetworkError.swift */; };
+		A43BDA222AC9F240004671AB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BDA212AC9F240004671AB /* Logger.swift */; };
+		A43BDA252AC9F4DE004671AB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BDA242AC9F4DE004671AB /* NetworkManager.swift */; };
+		A43BDA272AC9F572004671AB /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BDA262AC9F572004671AB /* Target.swift */; };
+		A43BDA292AC9F798004671AB /* Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BDA282AC9F798004671AB /* Encoding.swift */; };
+		A43BDA312ACA1370004671AB /* AnimueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BDA302ACA1370004671AB /* AnimueTests.swift */; };
+		A43BDA382ACA13A1004671AB /* DefaultParameterEncodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BDA372ACA13A1004671AB /* DefaultParameterEncodingTests.swift */; };
+		A43BDA3A2ACA268C004671AB /* HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BDA392ACA268C004671AB /* HTTPMethods.swift */; };
+		A43BDA3D2ACA2E7F004671AB /* AnimeTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BDA3C2ACA2E7F004671AB /* AnimeTarget.swift */; };
+		A43BDA402ACA2EC4004671AB /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BDA3F2ACA2EC4004671AB /* Config.swift */; };
+		A43BDA442ACA330A004671AB /* PageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BDA432ACA3309004671AB /* PageResponse.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A43BDA322ACA1370004671AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A425DBC52AC9E47600A3D921 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A425DBCC2AC9E47600A3D921;
+			remoteInfo = Animue;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A425DBCD2AC9E47600A3D921 /* Animue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Animue.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A425DBD02AC9E47600A3D921 /* AnimueApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimueApp.swift; sourceTree = "<group>"; };
+		A425DBD22AC9E47600A3D921 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A425DBD42AC9E47800A3D921 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A425DBD72AC9E47800A3D921 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A43BDA1F2AC9F1EC004671AB /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		A43BDA212AC9F240004671AB /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		A43BDA242AC9F4DE004671AB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A43BDA262AC9F572004671AB /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
+		A43BDA282AC9F798004671AB /* Encoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoding.swift; sourceTree = "<group>"; };
+		A43BDA2E2ACA1370004671AB /* AnimueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnimueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A43BDA302ACA1370004671AB /* AnimueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimueTests.swift; sourceTree = "<group>"; };
+		A43BDA372ACA13A1004671AB /* DefaultParameterEncodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultParameterEncodingTests.swift; sourceTree = "<group>"; };
+		A43BDA392ACA268C004671AB /* HTTPMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethods.swift; sourceTree = "<group>"; };
+		A43BDA3C2ACA2E7F004671AB /* AnimeTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeTarget.swift; sourceTree = "<group>"; };
+		A43BDA3F2ACA2EC4004671AB /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		A43BDA432ACA3309004671AB /* PageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageResponse.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A425DBCA2AC9E47600A3D921 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A425DBE02AC9E80000A3D921 /* ComposableArchitecture in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A43BDA2B2ACA1370004671AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A425DBC42AC9E47600A3D921 = {
+			isa = PBXGroup;
+			children = (
+				A425DBCF2AC9E47600A3D921 /* Animue */,
+				A43BDA2F2ACA1370004671AB /* AnimueTests */,
+				A425DBCE2AC9E47600A3D921 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A425DBCE2AC9E47600A3D921 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A425DBCD2AC9E47600A3D921 /* Animue.app */,
+				A43BDA2E2ACA1370004671AB /* AnimueTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A425DBCF2AC9E47600A3D921 /* Animue */ = {
+			isa = PBXGroup;
+			children = (
+				A43BDA3E2ACA2EBC004671AB /* Common */,
+				A43BDA3B2ACA2C8F004671AB /* Extensions */,
+				A43BDA1A2AC9EB02004671AB /* Data */,
+				A425DBD02AC9E47600A3D921 /* AnimueApp.swift */,
+				A425DBD22AC9E47600A3D921 /* ContentView.swift */,
+				A425DBD42AC9E47800A3D921 /* Assets.xcassets */,
+				A425DBD62AC9E47800A3D921 /* Preview Content */,
+			);
+			path = Animue;
+			sourceTree = "<group>";
+		};
+		A425DBD62AC9E47800A3D921 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A425DBD72AC9E47800A3D921 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A43BDA1A2AC9EB02004671AB /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A43BDA232AC9F4D3004671AB /* Network */,
+				A43BDA1C2AC9EB0F004671AB /* Managers */,
+				A43BDA1B2AC9EB09004671AB /* Models */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		A43BDA1B2AC9EB09004671AB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A43BDA1F2AC9F1EC004671AB /* NetworkError.swift */,
+				A43BDA392ACA268C004671AB /* HTTPMethods.swift */,
+				A43BDA432ACA3309004671AB /* PageResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A43BDA1C2AC9EB0F004671AB /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				A43BDA212AC9F240004671AB /* Logger.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		A43BDA232AC9F4D3004671AB /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A43BDA242AC9F4DE004671AB /* NetworkManager.swift */,
+				A43BDA262AC9F572004671AB /* Target.swift */,
+				A43BDA282AC9F798004671AB /* Encoding.swift */,
+				A43BDA3C2ACA2E7F004671AB /* AnimeTarget.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		A43BDA2F2ACA1370004671AB /* AnimueTests */ = {
+			isa = PBXGroup;
+			children = (
+				A43BDA302ACA1370004671AB /* AnimueTests.swift */,
+				A43BDA372ACA13A1004671AB /* DefaultParameterEncodingTests.swift */,
+			);
+			path = AnimueTests;
+			sourceTree = "<group>";
+		};
+		A43BDA3B2ACA2C8F004671AB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A43BDA3E2ACA2EBC004671AB /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				A43BDA3F2ACA2EC4004671AB /* Config.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A425DBCC2AC9E47600A3D921 /* Animue */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A425DBDB2AC9E47800A3D921 /* Build configuration list for PBXNativeTarget "Animue" */;
+			buildPhases = (
+				A425DBC92AC9E47600A3D921 /* Sources */,
+				A425DBCA2AC9E47600A3D921 /* Frameworks */,
+				A425DBCB2AC9E47600A3D921 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Animue;
+			packageProductDependencies = (
+				A425DBDF2AC9E80000A3D921 /* ComposableArchitecture */,
+			);
+			productName = animue;
+			productReference = A425DBCD2AC9E47600A3D921 /* Animue.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A43BDA2D2ACA1370004671AB /* AnimueTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A43BDA342ACA1370004671AB /* Build configuration list for PBXNativeTarget "AnimueTests" */;
+			buildPhases = (
+				A43BDA2A2ACA1370004671AB /* Sources */,
+				A43BDA2B2ACA1370004671AB /* Frameworks */,
+				A43BDA2C2ACA1370004671AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A43BDA332ACA1370004671AB /* PBXTargetDependency */,
+			);
+			name = AnimueTests;
+			productName = AnimueTests;
+			productReference = A43BDA2E2ACA1370004671AB /* AnimueTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A425DBC52AC9E47600A3D921 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					A425DBCC2AC9E47600A3D921 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					A43BDA2D2ACA1370004671AB = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = A425DBCC2AC9E47600A3D921;
+					};
+				};
+			};
+			buildConfigurationList = A425DBC82AC9E47600A3D921 /* Build configuration list for PBXProject "Animue" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A425DBC42AC9E47600A3D921;
+			packageReferences = (
+				A425DBDE2AC9E80000A3D921 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
+			productRefGroup = A425DBCE2AC9E47600A3D921 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A425DBCC2AC9E47600A3D921 /* Animue */,
+				A43BDA2D2ACA1370004671AB /* AnimueTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A425DBCB2AC9E47600A3D921 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A425DBD82AC9E47800A3D921 /* Preview Assets.xcassets in Resources */,
+				A425DBD52AC9E47800A3D921 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A43BDA2C2ACA1370004671AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A425DBC92AC9E47600A3D921 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A43BDA3A2ACA268C004671AB /* HTTPMethods.swift in Sources */,
+				A43BDA442ACA330A004671AB /* PageResponse.swift in Sources */,
+				A43BDA272AC9F572004671AB /* Target.swift in Sources */,
+				A43BDA202AC9F1EC004671AB /* NetworkError.swift in Sources */,
+				A43BDA292AC9F798004671AB /* Encoding.swift in Sources */,
+				A425DBD32AC9E47600A3D921 /* ContentView.swift in Sources */,
+				A43BDA252AC9F4DE004671AB /* NetworkManager.swift in Sources */,
+				A43BDA3D2ACA2E7F004671AB /* AnimeTarget.swift in Sources */,
+				A43BDA402ACA2EC4004671AB /* Config.swift in Sources */,
+				A425DBD12AC9E47600A3D921 /* AnimueApp.swift in Sources */,
+				A43BDA222AC9F240004671AB /* Logger.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A43BDA2A2ACA1370004671AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A43BDA382ACA13A1004671AB /* DefaultParameterEncodingTests.swift in Sources */,
+				A43BDA312ACA1370004671AB /* AnimueTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A43BDA332ACA1370004671AB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A425DBCC2AC9E47600A3D921 /* Animue */;
+			targetProxy = A43BDA322ACA1370004671AB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A425DBD92AC9E47800A3D921 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A425DBDA2AC9E47800A3D921 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A425DBDC2AC9E47800A3D921 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"animue/Preview Content\"";
+				DEVELOPMENT_TEAM = 4Y587KMYF2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raikh.animue;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A425DBDD2AC9E47800A3D921 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"animue/Preview Content\"";
+				DEVELOPMENT_TEAM = 4Y587KMYF2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raikh.animue;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A43BDA352ACA1370004671AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4Y587KMYF2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raikh.AnimueTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Animue.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Animue";
+			};
+			name = Debug;
+		};
+		A43BDA362ACA1370004671AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4Y587KMYF2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raikh.AnimueTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Animue.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Animue";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A425DBC82AC9E47600A3D921 /* Build configuration list for PBXProject "Animue" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A425DBD92AC9E47800A3D921 /* Debug */,
+				A425DBDA2AC9E47800A3D921 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A425DBDB2AC9E47800A3D921 /* Build configuration list for PBXNativeTarget "Animue" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A425DBDC2AC9E47800A3D921 /* Debug */,
+				A425DBDD2AC9E47800A3D921 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A43BDA342ACA1370004671AB /* Build configuration list for PBXNativeTarget "AnimueTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A43BDA352ACA1370004671AB /* Debug */,
+				A43BDA362ACA1370004671AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A425DBDE2AC9E80000A3D921 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A425DBDF2AC9E80000A3D921 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A425DBDE2AC9E80000A3D921 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = A425DBC52AC9E47600A3D921 /* Project object */;
+}
