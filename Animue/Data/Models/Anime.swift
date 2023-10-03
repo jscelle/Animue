@@ -21,3 +21,5 @@ struct Anime: Decodable {
     let releaseDate: String
     let subOrDub: String
 }
+
+extension Anime: Equatable { }

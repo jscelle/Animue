@@ -16,6 +16,7 @@ struct NetworkError: LocalizedError {
     
     enum `Type` {
         case missingURL
+        case failedToSerialize
     }
 }
 

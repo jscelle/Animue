@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct animueApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SeachView(
+                store: Store(initialState: Search.State(), reducer: {
+                    Search()
+                        ._printChanges()
+                })
+            )
         }
     }
 }
