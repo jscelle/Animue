@@ -1,5 +1,5 @@
 //
-//  SearchReducer.swift
+//  Search.swift
 //  Animue
 //
 //  Created by Artem Raykh on 02.10.2023.
@@ -8,9 +8,9 @@
 import Foundation
 import ComposableArchitecture
 
-struct Search: Reducer {
+struct SearchReducer: Reducer {
         
-    @Dependency(\.networkManager) private var networkManager
+    @Dependency(\.searchManager) private var networkManager
     
     @Dependency(\.mainQueue) private var mainQueue
         
@@ -23,18 +23,19 @@ struct Search: Reducer {
             return searchEffect(state)
             
         case .queryChanged(let query):
+            
             state.searchQuery = query
             
             if query.isEmpty {
                 state.results = []
                 
-                return .cancel(id: CancelID.anime)
+                return .cancel(id: CancelID.network)
             }
             
             return searchEffect(state)
             
         case .networkResponse(.success(let anime)):
-            state.results = anime
+            state.results.append(contentsOf: anime)
             
             return .none
         case .networkResponse(.failure(let error)):
@@ -48,17 +49,18 @@ struct Search: Reducer {
         .run { [query = state.searchQuery, page = state.page] send in
             await send(
                 .networkResponse(
-                    TaskResult { try await networkManager.search(query: query, page: page) }
+                    TaskResult { try await networkManager.search(query, page) }
                 )
             )
         }
-        .debounce(id: CancelID.anime, for: 0.2, scheduler: mainQueue)
-        .cancellable(id: CancelID.anime)
+        .debounce(id: CancelID.network, for: 0.2, scheduler: mainQueue)
+        .animation(.spring)
+        .cancellable(id: CancelID.network)
     }
 }
 
 // MARK: - State
-extension Search {
+extension SearchReducer {
     struct State: Equatable {
         var results: [Anime] = []
         var searchQuery: String = ""
@@ -68,7 +70,7 @@ extension Search {
 }
 
 // MARK: - Action
-extension Search {
+extension SearchReducer {
     enum Action {
         case pageAdded
         case queryChanged(String)
@@ -77,8 +79,8 @@ extension Search {
 }
 
 // MARK: - CancelId's
-private extension Search {
+private extension SearchReducer {
     enum CancelID {
-        case anime
+        case network
     }
 }

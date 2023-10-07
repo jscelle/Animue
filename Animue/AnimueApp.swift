@@ -13,11 +13,12 @@ struct animueApp: App {
     var body: some Scene {
         WindowGroup {
             SeachView(
-                store: Store(initialState: Search.State(), reducer: {
-                    Search()
+                store: Store(initialState: SearchReducer.State(), reducer: {
+                    SearchReducer()
                         ._printChanges()
                 })
             )
+            .preferredColorScheme(.dark)
         }
     }
 }

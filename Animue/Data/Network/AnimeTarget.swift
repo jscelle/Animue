@@ -35,4 +35,32 @@ extension AnimeTarget {
             )
         )
     }
+    
+    static func topAiring(page: Int) -> AnimeTarget {
+        AnimeTarget(
+            url: Config.baseURL,
+            path: "anime/gogoanime/top-airing",
+            method: .get,
+            task: .withParameters(
+                parameters: [
+                    "page": page
+                ],
+                encoding: URLEncoding.default
+            )
+        )
+    }
+    
+    static func recentEpisodes(page: Int) -> AnimeTarget {
+        AnimeTarget(
+            url: Config.baseURL,
+            path: "anime/gogoanime/recent-episodes",
+            method: .get,
+            task: .withParameters(
+                parameters: [
+                    "page": page
+                ],
+                encoding: URLEncoding.default
+            )
+        )
+    }
 }

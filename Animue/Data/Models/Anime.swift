@@ -7,19 +7,17 @@
 
 import Foundation
 
-struct PageResult: Decodable {
-    let currentPage: String?
-    let hasNextPage: Bool?
-    let results: [Anime]
-}
-
 struct Anime: Decodable {
     let id: String
     let title: String
-    let url: String
-    let image: String
+    let url: URL
+    let image: URL
     let releaseDate: String
-    let subOrDub: String
+    let subOrDub: SubOrDub
+}
+
+enum SubOrDub: Decodable {
+    case sub, dub
 }
 
 extension Anime: Equatable { }

@@ -18,6 +18,8 @@ final actor NetworkProvider<T: Target> {
     
     @Dependency(\.jsonSerializer) private var jsonSerializer
     
+    @Dependency (\.jsonDecoder) private var jsonDecoder
+    
     func request<Object: Decodable>(_ target: T) async throws -> Object {
         
         let request = try builder.build(target: target)
@@ -25,15 +27,25 @@ final actor NetworkProvider<T: Target> {
         logger.debug("The request is \(String(describing: request))")
         
         let (data, _) = try await session.data(for: request)
-        
+
         let dataDescription = try await jsonSerializer.serialize(data: data)
         
         logger.debug("The response for request \(String(describing: request)) is \(dataDescription)")
         
-        // Decode the response data into the specified Codable object
-        let decoder = JSONDecoder()
-        let responseObject = try decoder.decode(Object.self, from: data)
+        let responseObject = try jsonDecoder.decode(Object.self, from: data)
         return responseObject
+    }
+}
+
+extension DependencyValues {
+    private enum ProviderKey: DependencyKey {
+        static var liveValue: NetworkProvider<AnimeTarget> {
+            NetworkProvider<AnimeTarget>()
+        }
+    }
+    
+    var animeProvider: NetworkProvider<AnimeTarget> {
+        get { self[ProviderKey.self] }
     }
 }
 
