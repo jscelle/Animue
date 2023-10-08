@@ -11,27 +11,32 @@ import ComposableArchitecture
 import Dependencies
 
 struct MainSearchView: View {
+    
+    let store: StoreOf<MainSearchReducer>
+    
     var body: some View {
         
-        VStack {
-            searchView
-            
-            topAiring
-            
-            recentEpisodes
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            VStack {
+                searchView
+                
+                if !viewStore.state.showsSearch {
+                    topAiring
+                    
+                    recentEpisodes
+                }
+            }
+            .padding()
         }
-        .padding()
         
     }
     
     @ViewBuilder
     private var searchView: some View {
         SeachView(
-            store: Store(
-                initialState: SearchReducer.State(),
-                reducer: {
-                    SearchReducer()
-                }
+            store: store.scope(
+                state: \.searchState,
+                action: MainSearchReducer.Action.search
             )
         )
     }
@@ -41,17 +46,12 @@ struct MainSearchView: View {
         Text("Top Airing")
             .font(.system(.title))
             .frame(maxWidth: .infinity, alignment: .leading)
+            .foregroundStyle(.white)
         
         HorizontalListView(
-            store: Store(
-                initialState: HorizontalList.State(),
-                reducer: {
-                    withDependencies({
-                        $0.horizontalListManager = .topAiring
-                    }, operation: {
-                        HorizontalList()
-                    })
-                }
+            store: store.scope(
+                state: \.topAiringState,
+                action: MainSearchReducer.Action.topAiring
             )
         )
     }
@@ -62,18 +62,13 @@ struct MainSearchView: View {
         Text("Recent episodes")
             .font(.system(.title))
             .frame(maxWidth: .infinity, alignment: .leading)
+            .foregroundStyle(.white)
         
         
         HorizontalListView(
-            store: Store(
-                initialState: HorizontalList.State(),
-                reducer: {
-                    withDependencies({
-                        $0.horizontalListManager = .recentEpisodes
-                    }, operation: {
-                        HorizontalList()
-                    })
-                }
+            store: store.scope(
+                state: \.recentEpisodes,
+                action: MainSearchReducer.Action.recentEpisodes
             )
         )
     }
@@ -81,6 +76,15 @@ struct MainSearchView: View {
 
 struct MainSearchPreview: PreviewProvider {
     static var previews: some View {
-        MainSearchView()
+        MainSearchView(
+            store: Store(
+                initialState: MainSearchReducer.State(),
+                reducer: {
+                    MainSearchReducer()
+                        .dependency(\.horizontalListManager, .previewValue)
+                }
+            )
+        )
+        .preferredColorScheme(.dark)
     }
 }

@@ -138,12 +138,12 @@ final class HorizontalListTests: XCTestCase {
 fileprivate struct MockError: Error { }
 
 fileprivate let mockItems = [
-    HorizontalListItem(
+    Anime(
         id: UUID().uuidString,
         title: Mock.animeTitles.randomElement()!,
         image: Mock.images.randomElement()!
     ),
-    HorizontalListItem(
+    Anime(
         id: UUID().uuidString,
         title: Mock.animeTitles.randomElement()!,
         image: Mock.images.randomElement()!

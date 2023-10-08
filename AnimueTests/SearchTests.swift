@@ -40,7 +40,7 @@ final class SearchReducerTests: XCTestCase {
     
     // Test the behavior when a page adding succeeds
     func testPageAddedWithSuccess() async {
-        let anime = mockAnime
+        let anime = mockDtoAnime
         
         let store = TestStore(initialState: SearchReducer.State()) {
             SearchReducer()
@@ -94,7 +94,7 @@ final class SearchReducerTests: XCTestCase {
     
     // Test the behavior when a query change succeeds
     func testQueryChangedWithSuccess() async {
-        let anime = mockAnime
+        let anime = mockDtoAnime
         
         let store = TestStore(initialState: SearchReducer.State()) {
             SearchReducer()
@@ -148,12 +148,74 @@ final class SearchReducerTests: XCTestCase {
         
         await store.finish()
     }
+    
+    func testRecentsLoading() async {
+        let anime = mockAnime
+        
+        let store = TestStore(initialState: SearchReducer.State()) {
+            SearchReducer()
+        } withDependencies: {
+            
+            $0.animeDatabaseManager.fetchAll = {
+                anime
+            }
+        }
+        
+        await store.send(.loadRecent)
+        
+        await store.receive(
+            /SearchReducer.Action.databaseResponse(.success(anime))
+        ) { state in
+            state.recent = anime
+        }
+        
+        await store.finish()
+    }
+
+    func testRecentsDeletion() async {
+        
+        let mockAnime = mockAnime
+        
+        let animeIdToDelete = mockAnime.first!.id
+        
+        var withoutDeleted = mockAnime
+        withoutDeleted.removeAll { $0.id == animeIdToDelete }
+        
+        let store = TestStore(initialState: SearchReducer.State()) {
+            SearchReducer()
+        } withDependencies: {
+            $0.animeDatabaseManager.fetchAll = {
+                mockAnime
+            }
+            
+            $0.animeDatabaseManager.delete = {
+                _ in
+            }
+        }
+        
+        await store.send(.loadRecent)
+        
+        await store.receive(
+            /SearchReducer.Action.databaseResponse(.success(mockAnime))
+        ) { state in
+            state.recent = mockAnime // Expected recent anime after receiving data
+        }
+        
+        await store.send(.deleteRecent(animeIdToDelete))
+        
+        await store.receive(/SearchReducer.Action.databaseResponse(.success([]))) { state in
+            state.recent = withoutDeleted
+        }
+        
+        await store.finish()
+    }
+
 }
 
 fileprivate struct MockError: Error { }
 
-fileprivate let mockAnime = [
-    Anime(
+fileprivate let mockDtoAnime = [
+    AnimeSearchDTO(
         id: UUID().uuidString,
         title: Mock.animeTitles.randomElement()!,
         url: Mock.images.randomElement()!,
@@ -161,7 +223,7 @@ fileprivate let mockAnime = [
         releaseDate: "2021",
         subOrDub: .dub
     ),
-    Anime(
+    AnimeSearchDTO(
         id: UUID().uuidString,
         title: Mock.animeTitles.randomElement()!,
         url: Mock.images.randomElement()!,
@@ -169,12 +231,20 @@ fileprivate let mockAnime = [
         releaseDate: "2022",
         subOrDub: .dub
     ),
-    Anime(
+    AnimeSearchDTO(
         id: UUID().uuidString,
         title: Mock.animeTitles.randomElement()!,
         url: Mock.images.randomElement()!,
         image: Mock.images.randomElement()!,
         releaseDate: "2023",
         subOrDub: .dub
+    )
+]
+
+fileprivate let mockAnime = [
+    Anime(
+        id: UUID().uuidString,
+        title: Mock.animeTitles.randomElement()!,
+        image: Mock.images.randomElement()!
     )
 ]

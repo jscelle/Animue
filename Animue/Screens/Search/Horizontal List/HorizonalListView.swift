@@ -25,19 +25,29 @@ struct HorizontalListView: View {
                                     viewStore.send(.pageAdded)
                                 }
                             }
+                            .onTapGesture {
+                                viewStore.send(
+                                    .didSelect(
+                                        Anime(
+                                            id: item.id,
+                                            title: item.title.removingEpisode(),
+                                            image: item.image
+                                        )
+                                    )
+                                )
+                            }
                     }
                 }
             }
-            
             .onAppear {
-                viewStore.send(.pageAdded)
+                viewStore.send(.initialLoad)
             }
         }
     }
 }
 
 struct HorizontalItemView: View {
-    let item: HorizontalListItem
+    let item: Anime
     
     var body: some View {
         VStack {
@@ -59,7 +69,9 @@ struct HorizontalItemView: View {
                 .font(.system(.title2))
                 .foregroundStyle(.white)
                 .padding()
+                .lineLimit(nil)
         }
+        .frame(width: 150)
         .background(Color.black)
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }

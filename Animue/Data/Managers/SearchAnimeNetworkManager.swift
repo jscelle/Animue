@@ -9,7 +9,7 @@ import Foundation
 import Dependencies
 
 struct SearchAnimeNetworkManager {
-    var search: @Sendable (_ query: String, _ page: Int) async throws -> [Anime]
+    var search: @Sendable (_ query: String, _ page: Int) async throws -> [AnimeSearchDTO]
 }
 
 extension SearchAnimeNetworkManager: DependencyKey {
@@ -38,19 +38,19 @@ struct LiveSearchAnimeNetworkManager {
     
     @Dependency(\.animeProvider) private var provider
     
-    func search(query: String, page: Int) async throws -> [Anime] {
+    func search(query: String, page: Int) async throws -> [AnimeSearchDTO] {
         (try await provider.request(
             .fetchAnime(title: query, page: page)
-        ) as PageResponse<Anime>)
+        ) as PageResponse<AnimeSearchDTO>)
         .results
     }
 }
 
 struct PreviewSearchAnimeNetworkManager {
     
-    func search(query: String, page: Int) async throws -> [Anime] {
+    func search(query: String, page: Int) async throws -> [AnimeSearchDTO] {
         (0...page * 10).map { number in
-            Anime(
+            AnimeSearchDTO(
                 id: "\(number)",
                 title: Mock.animeTitles.randomElement()!,
                 url: Mock.images.randomElement()!,

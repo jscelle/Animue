@@ -9,13 +9,51 @@ import Foundation
 import ComposableArchitecture
 
 struct SearchReducer: Reducer {
-        
+    
     @Dependency(\.searchManager) private var networkManager
     
+    @Dependency(\.animeDatabaseManager) private var databaseManager
+    
     @Dependency(\.mainQueue) private var mainQueue
-        
+    
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
+            
+        case .loadRecent:
+            
+            return .run { send in
+                await send(
+                    .databaseResponse(
+                        TaskResult{ try await databaseManager.fetchAll() }
+                    )
+                )
+            }
+            
+        case .databaseResponse(.failure(let error)):
+            state.error = AnimeError(error: error)
+            
+            return .none
+        case .databaseResponse(.success(let anime)):
+            
+            state.recent = anime
+            
+            return .none
+            
+        case .deleteRecent(let id):
+            
+            return .run { [recent = state.recent] send in
+                await send(
+                    .databaseResponse(TaskResult {
+                        try await databaseManager.delete(id)
+                        
+                        var recent = recent
+                        recent.removeAll { $0.id == id }
+                        
+                        return recent
+                    })
+                )
+            }
+            
         case .pageAdded:
             
             state.page += 1
@@ -27,7 +65,7 @@ struct SearchReducer: Reducer {
             state.searchQuery = query
             
             if query.isEmpty {
-                state.results = []
+                state.results.removeAll()
                 
                 return .cancel(id: CancelID.network)
             }
@@ -35,11 +73,17 @@ struct SearchReducer: Reducer {
             return searchEffect(state)
             
         case .networkResponse(.success(let anime)):
+            
             state.results.append(contentsOf: anime)
+            
+            state.recent.removeAll()
             
             return .none
         case .networkResponse(.failure(let error)):
             state.error = AnimeError(error: error)
+            
+            return .none
+        case .didSelect:
             
             return .none
         }
@@ -62,7 +106,8 @@ struct SearchReducer: Reducer {
 // MARK: - State
 extension SearchReducer {
     struct State: Equatable {
-        var results: [Anime] = []
+        var results: Array<AnimeSearchDTO> = .init()
+        var recent: Array<Anime> = .init()
         var searchQuery: String = ""
         var page: Int = 1
         var error: AnimeError? = nil
@@ -72,9 +117,13 @@ extension SearchReducer {
 // MARK: - Action
 extension SearchReducer {
     enum Action {
+        case loadRecent
+        case databaseResponse(TaskResult<[Anime]>)
+        case deleteRecent(String)
         case pageAdded
         case queryChanged(String)
-        case networkResponse(TaskResult<[Anime]>)
+        case networkResponse(TaskResult<[AnimeSearchDTO]>)
+        case didSelect(Anime)
     }
 }
 
@@ -82,5 +131,6 @@ extension SearchReducer {
 private extension SearchReducer {
     enum CancelID {
         case network
+        case database
     }
 }

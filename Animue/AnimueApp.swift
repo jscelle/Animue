@@ -12,11 +12,13 @@ import ComposableArchitecture
 struct animueApp: App {
     var body: some Scene {
         WindowGroup {
-            SeachView(
-                store: Store(initialState: SearchReducer.State(), reducer: {
-                    SearchReducer()
-                        ._printChanges()
-                })
+            MainSearchView(
+                store: Store(
+                    initialState: MainSearchReducer.State(),
+                    reducer: {
+                        MainSearchReducer()
+                    }
+                )
             )
             .preferredColorScheme(.dark)
         }

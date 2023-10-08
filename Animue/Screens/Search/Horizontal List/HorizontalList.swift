@@ -42,13 +42,16 @@ struct HorizontalList: Reducer {
             state.error = AnimeError(error: error)
             
             return .none
+            
+        case .didSelect:
+            return .none
         }
     }
 }
 
 extension HorizontalList {
     struct State: Equatable {
-        var items: [HorizontalListItem] = []
+        var items: [Anime] = []
         var error: AnimeError? = nil
         var page: Int = 1
     }
@@ -58,7 +61,8 @@ extension HorizontalList {
     enum Action {
         case initialLoad
         case pageAdded
-        case networkResponse(TaskResult<[HorizontalListItem]>)
+        case networkResponse(TaskResult<[Anime]>)
+        case didSelect(Anime)
     }
 }
 

@@ -9,7 +9,7 @@ import Foundation
 import Dependencies
 
 struct HorizontalListNetworkManager {
-    var load: @Sendable (_ page: Int) async throws -> [HorizontalListItem]
+    var load: @Sendable (_ page: Int) async throws -> [Anime]
 }
 
 extension HorizontalListNetworkManager: DependencyKey {
@@ -56,11 +56,11 @@ extension DependencyValues {
 struct TopAiringListNetworkManager {
     @Dependency(\.animeProvider) private var provider
 
-    func load(page: Int) async throws -> [HorizontalListItem] {
+    func load(page: Int) async throws -> [Anime] {
         (try await provider.request(.topAiring(page: page)) as PageResponse<TopAiring>)
             .results
             .map { anime in
-                HorizontalListItem(
+                Anime(
                     id: anime.id,
                     title: anime.title,
                     image: anime.image
@@ -72,13 +72,13 @@ struct TopAiringListNetworkManager {
 struct RecentEpisodesListNetworkManager {
     @Dependency(\.animeProvider) private var provider
     
-    func load(page: Int) async throws -> [HorizontalListItem] {
+    func load(page: Int) async throws -> [Anime] {
         (try await provider.request(.recentEpisodes(page: page)) as PageResponse<Episode>)
             .results
             .map { episode in
-                HorizontalListItem(
+                Anime(
                     id: episode.id,
-                    title: "Episode \(episode.episodeNumber) of \(episode.title)",
+                    title: episode.title.addingEpisode(number: episode.episodeNumber),
                     image: episode.image
                 )
             }
@@ -86,9 +86,9 @@ struct RecentEpisodesListNetworkManager {
 }
 
 struct MockListNetworkManager {
-    func load(page: Int) async throws -> [HorizontalListItem] {
+    func load(page: Int) async throws -> [Anime] {
         (0...page * 10).map { number in
-            HorizontalListItem(
+            Anime(
                 id: "\(number)",
                 title: Mock.animeTitles.randomElement()!,
                 image: Mock.images.randomElement()!
