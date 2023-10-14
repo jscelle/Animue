@@ -21,9 +21,7 @@ struct SeachView: View {
         
         VStack {
             textField
-            
-            recentList
-            
+                    
             list
         }
     }
@@ -52,50 +50,6 @@ struct SeachView: View {
             }
             .background(Color.black)
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            .onAppear {
-                viewStore.send(.loadRecent)
-            }
-        }
-    }
-    
-    private var recentList: some View {
-        WithViewStore(store, observe: { $0.recent }) { viewStore in
-            
-            if !viewStore.isEmpty {
-                
-                Text("Recently visited")
-                    .foregroundStyle(.white)
-                    .font(.title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                List(viewStore.state, id: \.id) { item in
-                    HStack {
-                        Button(action: {
-                            viewStore.send(.deleteRecent(item.id))
-                        }) {
-                            Image(systemName: "trash")
-                                .foregroundColor(.gray)
-                        }
-                        .padding()
-                        
-                        Text(item.title)
-                            .font(.body)
-                            .foregroundStyle(.white)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    .listRowInsets(
-                        .init(
-                            top: 2,
-                            leading: 0,
-                            bottom: 2,
-                            trailing: 0
-                        )
-                    )
-                    .background(Color.black)
-                }
-                .listStyle(.plain)
-            }
-            
         }
     }
     

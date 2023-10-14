@@ -35,7 +35,7 @@ final class DefaultParameterEncodingTests: XCTestCase {
         
         let response = try encoder.encode(base: request, parameters: parameters)
             
-            // Verify the encoded URL
+        // Verify the encoded URL
         XCTAssertEqual(response.url?.absoluteString, "https://example.com?age=30")
     }
     
@@ -62,10 +62,25 @@ final class DefaultParameterEncodingTests: XCTestCase {
         
         let parameters: [String: Any] = [:] // Empty parameters
         
-        
         let response = try encoder.encode(base: request, parameters: parameters)
             
         // Verify that the URL remains unchanged
         XCTAssertEqual(response.url?.absoluteString, "https://example.com")
+    }
+    
+    func testEmptyURL() throws {
+        let url = URL(string: "https://example.com")!
+        var request = URLRequest(url: url)
+        request.url = nil
+        request.httpMethod = HTTPMethod.get.rawValue
+        
+        let parameters: [String: Any] = [:] // Empty parameters
+        
+        do {
+            _ = try encoder.encode(base: request, parameters: parameters)
+            XCTFail("Expected an error to be thrown")
+        } catch {
+            XCTAssertNotNil(error)
+        }
     }
 }

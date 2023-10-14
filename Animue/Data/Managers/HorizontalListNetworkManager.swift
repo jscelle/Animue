@@ -44,6 +44,14 @@ extension HorizontalListNetworkManager: DependencyKey {
             try await manager.load(page: page)
         }
     }
+    
+    static var recentlyVisited: Self {
+        @Dependency(\.animeDatabaseManager) var manager
+        
+        return Self { _ in
+            try await manager.fetchAll()
+        }
+    }
 }
 
 extension DependencyValues {

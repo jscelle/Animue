@@ -32,6 +32,10 @@
 		A488ECEF2ACCADA3000611D9 /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A488ECEE2ACCADA3000611D9 /* CachedAsyncImage.swift */; };
 		A488ECF22ACCB744000611D9 /* JSONSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A488ECF12ACCB744000611D9 /* JSONSerializer.swift */; };
 		A488ECF42ACCB828000611D9 /* JSONSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A488ECF32ACCB828000611D9 /* JSONSerializerTests.swift */; };
+		A4CC281C2AD9CC150088327B /* RecentlyVisited.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC281B2AD9CC150088327B /* RecentlyVisited.swift */; };
+		A4CC281E2AD9CE7B0088327B /* RecentlyWatchedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC281D2AD9CE7B0088327B /* RecentlyWatchedTests.swift */; };
+		A4CC28202ADB11100088327B /* RecentlyVisitedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC281F2ADB11100088327B /* RecentlyVisitedView.swift */; };
+		A4CC28222ADB116C0088327B /* HorizontalListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC28212ADB116C0088327B /* HorizontalListItem.swift */; };
 		A4E197A12AD16AB0009F5600 /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E197A02AD16AB0009F5600 /* JSONDecoder.swift */; };
 		A4E197A32AD1BC7F009F5600 /* HorizontalList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E197A22AD1BC7E009F5600 /* HorizontalList.swift */; };
 		A4E197A52AD1BDB4009F5600 /* TopAiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E197A42AD1BDB4009F5600 /* TopAiring.swift */; };
@@ -95,6 +99,10 @@
 		A488ECF02ACCB36F000611D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A488ECF12ACCB744000611D9 /* JSONSerializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONSerializer.swift; sourceTree = "<group>"; };
 		A488ECF32ACCB828000611D9 /* JSONSerializerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONSerializerTests.swift; sourceTree = "<group>"; };
+		A4CC281B2AD9CC150088327B /* RecentlyVisited.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyVisited.swift; sourceTree = "<group>"; };
+		A4CC281D2AD9CE7B0088327B /* RecentlyWatchedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyWatchedTests.swift; sourceTree = "<group>"; };
+		A4CC281F2ADB11100088327B /* RecentlyVisitedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyVisitedView.swift; sourceTree = "<group>"; };
+		A4CC28212ADB116C0088327B /* HorizontalListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalListItem.swift; sourceTree = "<group>"; };
 		A4E197A02AD16AB0009F5600 /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		A4E197A22AD1BC7E009F5600 /* HorizontalList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalList.swift; sourceTree = "<group>"; };
 		A4E197A42AD1BDB4009F5600 /* TopAiring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAiring.swift; sourceTree = "<group>"; };
@@ -242,6 +250,7 @@
 				A4E197B82AD202D5009F5600 /* HorizontalListTests.swift */,
 				A4E197BF2AD2C030009F5600 /* MainSearchTests.swift */,
 				A4E197C92AD2D774009F5600 /* StringEpisodeTests.swift */,
+				A4CC281D2AD9CE7B0088327B /* RecentlyWatchedTests.swift */,
 			);
 			path = AnimueTests;
 			sourceTree = "<group>";
@@ -275,6 +284,7 @@
 		A43BDA512ACB63F7004671AB /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				A4CC281A2AD9CBF30088327B /* RecentlyVisited */,
 				A4E197BD2AD2A6C8009F5600 /* Horizontal List */,
 				A4E197BC2AD2A6BE009F5600 /* Search */,
 				A4E197B22AD1E38D009F5600 /* MainSearchView.swift */,
@@ -300,6 +310,15 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		A4CC281A2AD9CBF30088327B /* RecentlyVisited */ = {
+			isa = PBXGroup;
+			children = (
+				A4CC281B2AD9CC150088327B /* RecentlyVisited.swift */,
+				A4CC281F2ADB11100088327B /* RecentlyVisitedView.swift */,
+			);
+			path = RecentlyVisited;
+			sourceTree = "<group>";
+		};
 		A4E197BC2AD2A6BE009F5600 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +334,7 @@
 			children = (
 				A4E197A22AD1BC7E009F5600 /* HorizontalList.swift */,
 				A4E197A62AD1CC91009F5600 /* HorizonalListView.swift */,
+				A4CC28212ADB116C0088327B /* HorizontalListItem.swift */,
 			);
 			path = "Horizontal List";
 			sourceTree = "<group>";
@@ -466,6 +486,7 @@
 				A4E197A32AD1BC7F009F5600 /* HorizontalList.swift in Sources */,
 				A4E197B72AD1F448009F5600 /* LocalError.swift in Sources */,
 				A43BDA202AC9F1EC004671AB /* NetworkError.swift in Sources */,
+				A4CC281C2AD9CC150088327B /* RecentlyVisited.swift in Sources */,
 				A43BDA532ACB640E004671AB /* SearchReducer.swift in Sources */,
 				A488ECEA2ACC78DB000611D9 /* SeachView.swift in Sources */,
 				A4E197A72AD1CC91009F5600 /* HorizonalListView.swift in Sources */,
@@ -481,6 +502,8 @@
 				A4E197A92AD1DCAE009F5600 /* HorizontalListNetworkManager.swift in Sources */,
 				A43BDA3D2ACA2E7F004671AB /* AnimeTarget.swift in Sources */,
 				A4E197BB2AD2A68D009F5600 /* MainSearchReducer.swift in Sources */,
+				A4CC28222ADB116C0088327B /* HorizontalListItem.swift in Sources */,
+				A4CC28202ADB11100088327B /* RecentlyVisitedView.swift in Sources */,
 				A4E197C82AD2D6A4009F5600 /* String + Episodes.swift in Sources */,
 				A43BDA402ACA2EC4004671AB /* Config.swift in Sources */,
 				A425DBD12AC9E47600A3D921 /* AnimueApp.swift in Sources */,
@@ -504,6 +527,7 @@
 				A4E197B92AD202D5009F5600 /* HorizontalListTests.swift in Sources */,
 				A488ECF42ACCB828000611D9 /* JSONSerializerTests.swift in Sources */,
 				A4E197CA2AD2D774009F5600 /* StringEpisodeTests.swift in Sources */,
+				A4CC281E2AD9CE7B0088327B /* RecentlyWatchedTests.swift in Sources */,
 				A4E197C02AD2C030009F5600 /* MainSearchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

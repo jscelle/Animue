@@ -10,9 +10,7 @@ import ComposableArchitecture
 import Dependencies
 
 struct MainSearchReducer: Reducer {
-    
-    @Dependency(\.animeDatabaseManager) private var databaseManager
-    
+        
     var body: some Reducer<State, Action> {
         
         Scope(
@@ -27,7 +25,7 @@ struct MainSearchReducer: Reducer {
             state: \.topAiringState,
             action: /Action.topAiring,
             child: {
-                withDependencies { 
+                withDependencies {
                     $0.horizontalListManager = .topAiring
                 } operation: {
                     HorizontalList()
@@ -47,42 +45,42 @@ struct MainSearchReducer: Reducer {
             }
         )
         
+        Scope(
+            state: \.recentlyVisited,
+            action: /Action.recentlyVisited,
+            child: {
+                RecentlyVisited()
+            }
+        )
+        
         Reduce { state, action in
             switch action {
             case .search(.queryChanged(let query)):
                 
                 return .send(.showSearch(!query.isEmpty), animation: .spring())
                 
-            case .showSearch(let showSearch):
+            case let .showSearch(showSearch):
                 
                 state.showsSearch = showSearch
                 
                 return .none
+
+            case let .search(.didSelect(anime)),
+                    let .topAiring(.didSelect(anime)),
+                    let .recentEpisodes(.didSelect(anime)),
+                    let .recentlyVisited(.didSelect(anime)):
                 
-            case .search(.didSelect(let anime)), .topAiring(.didSelect(let anime)), .recentEpisodes(.didSelect(let anime)):
+                return .send(.didSelect(anime))
                 
-                return .merge(
-                    .run { send in
-                        await send(
-                            .didSelect(anime.id)
-                        )
-                    },
-                    .run { send in
-                        await send(
-                            .didSaved(TaskResult { try await databaseManager.save(anime) })
-                        )
-                    },
-                    .run { send in
-                        await send(
-                            .search(.loadRecent)
-                        )
-                    }
-                )
+            case let .didSelect(anime):
+                
+                return .send(.recentlyVisited(.save(anime: anime)))
                 
             default:
                 return .none
             }
         }
+        
     }
 }
 
@@ -92,17 +90,18 @@ extension MainSearchReducer {
         var searchState = SearchReducer.State()
         var topAiringState = HorizontalList.State()
         var recentEpisodes = HorizontalList.State()
+        var recentlyVisited = RecentlyVisited.State()
     }
 }
 
 extension MainSearchReducer {
     enum Action {
-        case didSelect(String)
-        case didSaved(TaskResult<Void>)
+        case didSelect(Anime)
         case showSearch(Bool)
         case handleError(Error)
         case search(SearchReducer.Action)
         case topAiring(HorizontalList.Action)
         case recentEpisodes(HorizontalList.Action)
+        case recentlyVisited(RecentlyVisited.Action)
     }
 }

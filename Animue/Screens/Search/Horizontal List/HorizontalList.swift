@@ -19,10 +19,12 @@ struct HorizontalList: Reducer {
             
             return .run { [page = state.page] send in
                 await send(
-                    .networkResponse(TaskResult { try await manager.load(page) })
+                    .dataResponse(TaskResult { try await manager.load(page) })
                 )
             }
             .cancellable(id: CancelID.network)
+            
+        
             
         case .pageAdded:
             
@@ -30,15 +32,19 @@ struct HorizontalList: Reducer {
             
             return .run { [page = state.page] send in
                 await send(
-                    .networkResponse(TaskResult { try await manager.load(page) })
+                    .dataResponse(TaskResult { try await manager.load(page) })
                 )
             }
             .cancellable(id: CancelID.network)
             
-        case .networkResponse(.success(let items)):
+        case let .dataResponse(.success(items)):
+            
             state.items.append(contentsOf: items)
+            
             return .none
-        case .networkResponse(.failure(let error)):
+            
+        case let .dataResponse(.failure(error)):
+            
             state.error = AnimeError(error: error)
             
             return .none
@@ -61,7 +67,8 @@ extension HorizontalList {
     enum Action {
         case initialLoad
         case pageAdded
-        case networkResponse(TaskResult<[Anime]>)
+        
+        case dataResponse(TaskResult<[Anime]>)
         case didSelect(Anime)
     }
 }

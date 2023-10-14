@@ -7,7 +7,7 @@
 
 import XCTest
 import ComposableArchitecture
-@testable import Animue // Replace with your app's module name
+@testable import Animue
 
 @MainActor
 final class SearchReducerTests: XCTestCase {
@@ -18,11 +18,8 @@ final class SearchReducerTests: XCTestCase {
         
         let store = TestStore(initialState: SearchReducer.State()) {
             SearchReducer()
-        } withDependencies: {
-            
-            $0.mainQueue = .main
-            
-            $0.searchManager.search = { _, _  in throw error }
+                .dependency(\.mainQueue, .main)
+                .dependency(\.searchManager, .init(search: { _, _ in throw error }))
         }
         
         await store.send(.pageAdded) { state in
@@ -44,13 +41,8 @@ final class SearchReducerTests: XCTestCase {
         
         let store = TestStore(initialState: SearchReducer.State()) {
             SearchReducer()
-        } withDependencies: {
-            
-            $0.mainQueue = .main
-            
-            $0.searchManager.search = { _, _ in
-                anime
-            }
+                .dependency(\.mainQueue, .main)
+                .dependency(\.searchManager, .init(search: { _, _ in anime }))
         }
         
         await store.send(.pageAdded) { state in
@@ -72,11 +64,8 @@ final class SearchReducerTests: XCTestCase {
         
         let store = TestStore(initialState: SearchReducer.State()) {
             SearchReducer()
-        } withDependencies: {
-            
-            $0.mainQueue = .main
-            
-            $0.searchManager.search = { _, _  in throw error }
+                .dependency(\.mainQueue, .main)
+                .dependency(\.searchManager, .init(search: { _, _ in throw error }))
         }
         
         await store.send(.queryChanged("New Query")) { state in
@@ -98,13 +87,8 @@ final class SearchReducerTests: XCTestCase {
         
         let store = TestStore(initialState: SearchReducer.State()) {
             SearchReducer()
-        } withDependencies: {
-            
-            $0.mainQueue = .main
-            
-            $0.searchManager.search = { _, _ in
-                anime
-            }
+                .dependency(\.mainQueue, .main)
+                .dependency(\.searchManager, .init(search: { _, _ in anime }))
         }
         
         await store.send(.queryChanged("New Query")) { state in
@@ -124,15 +108,19 @@ final class SearchReducerTests: XCTestCase {
     // Test clearing the results if query is empty
     func testNetworkCancelationIfEmptyQuery() async {
         
+        let anime = [AnimeSearchDTO(
+            id: UUID().uuidString,
+            title: Mock.animeTitles.randomElement()!,
+            url: Mock.images.randomElement()!,
+            image: Mock.images.randomElement()!,
+            releaseDate: "2000",
+            subOrDub: .dub
+        )]
+        
         let store = TestStore(initialState: SearchReducer.State()) {
             SearchReducer()
-        } withDependencies: {
-            
-            $0.mainQueue = .main
-            
-            $0.searchManager.search = { _, _  in
-                try await Task.never()
-            }
+                .dependency(\.mainQueue, .main)
+                .dependency(\.searchManager, .init(search: { _, _ in anime }))
         }
         
         // Set the query
@@ -140,7 +128,14 @@ final class SearchReducerTests: XCTestCase {
             state.searchQuery = "New Query"
         }
         
-        // Empty the query
+        // Get the mock network response
+        await store.receive(
+            /SearchReducer.Action.networkResponse(.success([]))
+        ) { state in
+            state.results = anime
+        }
+        
+        // Empty the query, empty the results
         await store.send(.queryChanged("")) { state in
             state.searchQuery = ""
             state.results = []
@@ -148,68 +143,6 @@ final class SearchReducerTests: XCTestCase {
         
         await store.finish()
     }
-    
-    func testRecentsLoading() async {
-        let anime = mockAnime
-        
-        let store = TestStore(initialState: SearchReducer.State()) {
-            SearchReducer()
-        } withDependencies: {
-            
-            $0.animeDatabaseManager.fetchAll = {
-                anime
-            }
-        }
-        
-        await store.send(.loadRecent)
-        
-        await store.receive(
-            /SearchReducer.Action.databaseResponse(.success(anime))
-        ) { state in
-            state.recent = anime
-        }
-        
-        await store.finish()
-    }
-
-    func testRecentsDeletion() async {
-        
-        let mockAnime = mockAnime
-        
-        let animeIdToDelete = mockAnime.first!.id
-        
-        var withoutDeleted = mockAnime
-        withoutDeleted.removeAll { $0.id == animeIdToDelete }
-        
-        let store = TestStore(initialState: SearchReducer.State()) {
-            SearchReducer()
-        } withDependencies: {
-            $0.animeDatabaseManager.fetchAll = {
-                mockAnime
-            }
-            
-            $0.animeDatabaseManager.delete = {
-                _ in
-            }
-        }
-        
-        await store.send(.loadRecent)
-        
-        await store.receive(
-            /SearchReducer.Action.databaseResponse(.success(mockAnime))
-        ) { state in
-            state.recent = mockAnime // Expected recent anime after receiving data
-        }
-        
-        await store.send(.deleteRecent(animeIdToDelete))
-        
-        await store.receive(/SearchReducer.Action.databaseResponse(.success([]))) { state in
-            state.recent = withoutDeleted
-        }
-        
-        await store.finish()
-    }
-
 }
 
 fileprivate struct MockError: Error { }

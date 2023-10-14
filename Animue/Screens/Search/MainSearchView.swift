@@ -17,18 +17,22 @@ struct MainSearchView: View {
     var body: some View {
         
         WithViewStore(store, observe: { $0 }) { viewStore in
-            VStack {
-                searchView
-                
-                if !viewStore.state.showsSearch {
-                    topAiring
+            
+            ScrollView {
+                VStack {
+                    searchView
                     
-                    recentEpisodes
+                    if !viewStore.state.showsSearch {
+                        topAiring
+                        
+                        recentEpisodes
+                        
+                        recenlyVisited
+                    }
                 }
+                .padding()
             }
-            .padding()
         }
-        
     }
     
     @ViewBuilder
@@ -69,6 +73,21 @@ struct MainSearchView: View {
             store: store.scope(
                 state: \.recentEpisodes,
                 action: MainSearchReducer.Action.recentEpisodes
+            )
+        )
+    }
+    
+    @ViewBuilder
+    private var recenlyVisited: some View {
+        Text("Recently visited")
+            .font(.system(.title))
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .foregroundStyle(.white)
+        
+        RecentlyVisitedView(
+            store: store.scope(
+                state: \.recentlyVisited,
+                action: MainSearchReducer.Action.recentlyVisited
             )
         )
     }

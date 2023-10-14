@@ -27,7 +27,7 @@ final class HorizontalListTests: XCTestCase {
         await store.send(.initialLoad)
         
         await store.receive(
-            /HorizontalList.Action.networkResponse(.failure(error))
+            /HorizontalList.Action.dataResponse(.failure(error))
         ) { state in
             state.error = AnimeError(error: error)
         }
@@ -51,7 +51,7 @@ final class HorizontalListTests: XCTestCase {
         await store.send(.initialLoad)
         
         await store.receive(
-            /HorizontalList.Action.networkResponse(.success(items))
+            /HorizontalList.Action.dataResponse(.success(items))
         ) { state in
             state.items = items // Expected items after receiving data
         }
@@ -77,7 +77,7 @@ final class HorizontalListTests: XCTestCase {
         }
         
         await store.receive(
-            /HorizontalList.Action.networkResponse(.failure(error))
+            /HorizontalList.Action.dataResponse(.failure(error))
         ) { state in
             state.error = AnimeError(error: error)
         }
@@ -103,7 +103,7 @@ final class HorizontalListTests: XCTestCase {
         }
         
         await store.receive(
-            /HorizontalList.Action.networkResponse(.success(items))
+            /HorizontalList.Action.dataResponse(.success(items))
         ) { state in
             state.items.append(contentsOf: items) // Expected items after receiving data
         }
@@ -126,7 +126,7 @@ final class HorizontalListTests: XCTestCase {
         await store.send(.initialLoad)
         
         await store.receive(
-            /HorizontalList.Action.networkResponse(.success(items))
+            /HorizontalList.Action.dataResponse(.success(items))
         ) { state in
             state.items = items // Expected items after receiving data
         }

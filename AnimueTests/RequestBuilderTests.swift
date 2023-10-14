@@ -51,6 +51,20 @@ final class RequestBuilderTests: XCTestCase {
         XCTAssertEqual(request.httpMethod, target.method.rawValue)
         XCTAssertEqual(request.url, target.url.appendingPathComponent(target.path))
     }
+    
+    func testBuildRequestWithHeaders() throws {
+        var target = MockTarget()
+        target.headers = ["Authorization": "Bearer Token", "Content-Type": "application/json"]
+        
+        let request = try builder.build(target: target)
+        
+        XCTAssertEqual(request.httpMethod, target.method.rawValue)
+        XCTAssertEqual(request.url, target.url.appendingPathComponent(target.path))
+        
+        // Check if the headers are set correctly
+        XCTAssertEqual(request.value(forHTTPHeaderField: "Authorization"), "Bearer Token")
+        XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/json")
+    }
 }
 
 // Mock implementations for testing
@@ -59,7 +73,7 @@ struct MockTarget: Target {
     let path = "/test"
     let method = HTTPMethod.get
     let task = NetworkTask.plain
-    let headers: [String: String]? = nil
+    var headers: [String: String]? = nil
     let authorizationHeaders: [String: String]? = nil
 }
 

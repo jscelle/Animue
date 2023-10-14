@@ -1,58 +1,55 @@
 //
-//  TopAiringView.swift
+//  RecentlyVisitedView.swift
 //  Animue
 //
-//  Created by Artem Raykh on 07.10.2023.
+//  Created by Artem Raykh on 14.10.2023.
 //
 
-import Foundation
-import SwiftUI
 import ComposableArchitecture
+import SwiftUI
 
-struct HorizontalListView: View {
+struct RecentlyVisitedView: View {
     
-    let store: StoreOf<HorizontalList>
+    let store: StoreOf<RecentlyVisited>
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ScrollView([.horizontal], showsIndicators: false) {
                 
                 LazyHStack {
-                    ForEach(viewStore.state.items, id: \.id) { item in
+                    ForEach(viewStore.state.recentlyWatched, id: \.id) { item in
                         HorizontalItemView(item: item)
-                            .onAppear {
-                                if item == viewStore.state.items.last {
-                                    viewStore.send(.pageAdded)
-                                }
-                            }
                             .onTapGesture {
                                 viewStore.send(
                                     .didSelect(
-                                        Anime(
+                                        anime: Anime(
                                             id: item.id,
-                                            title: item.title.removingEpisode(),
+                                            title: item.title,
                                             image: item.image
                                         )
                                     )
                                 )
                             }
+                            .onLongPressGesture {
+                                
+                            }
                     }
                 }
-            }
-            .onAppear {
-                viewStore.send(.initialLoad)
+                .onAppear {
+                    viewStore.send(.load)
+                }
             }
         }
     }
 }
 
-struct HorizonalListPreview: PreviewProvider {
+struct RecentlyVisitedPreview: PreviewProvider {
     static var previews: some View {
-        HorizontalListView(
+        RecentlyVisitedView(
             store: Store(
-                initialState: HorizontalList.State(),
+                initialState: RecentlyVisited.State(),
                 reducer: {
-                    HorizontalList()
+                    RecentlyVisited()
             })
         )
     }
