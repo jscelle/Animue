@@ -18,3 +18,9 @@ struct AnimeError: LocalizedError {
 extension AnimeError: Equatable {
     
 }
+
+extension AnimeError {
+    init(message: String) {
+        self.errorDescription = message
+    }
+}

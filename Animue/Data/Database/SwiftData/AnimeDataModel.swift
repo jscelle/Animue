@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class AnimeSwiftData {
+final class AnimeSwiftData {
     @Attribute(.unique) let id: String
     let title: String
     let image: URL

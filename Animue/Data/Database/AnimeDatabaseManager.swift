@@ -1,5 +1,5 @@
 //
-//  DatabaseManager.swift
+//  AnimeDatabaseManager.swift
 //  Animue
 //
 //  Created by Artem Raykh on 08.10.2023.
@@ -18,10 +18,10 @@ extension AnimeDatabaseManager: DependencyKey {
     static var liveValue: AnimeDatabaseManager {
         
         guard #available(iOS 17, *) else {
-            return .swiftData
+            return .coreData
         }
         
-        return .coreData
+        return .swiftData
     }
     
     static var previewValue: AnimeDatabaseManager {
@@ -72,7 +72,7 @@ extension AnimeDatabaseManager: DependencyKey {
     }
     
     static var swiftData: AnimeDatabaseManager {
-        let controller = SwiftDataController()
+        let controller = AnimeSwiftDataController()
         
         return Self(
             save: { anime in

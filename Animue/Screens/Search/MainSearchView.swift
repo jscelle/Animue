@@ -24,10 +24,13 @@ struct MainSearchView: View {
                     
                     if !viewStore.state.showsSearch {
                         topAiring
+                            .frame(height: 300)
                         
                         recentEpisodes
+                            .frame(height: 300)
                         
                         recenlyVisited
+                            .frame(height: 300)
                     }
                 }
                 .padding()
@@ -47,49 +50,55 @@ struct MainSearchView: View {
     
     @ViewBuilder
     private var topAiring: some View {
-        Text("Top Airing")
-            .font(.system(.title))
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .foregroundStyle(.white)
-        
-        HorizontalListView(
-            store: store.scope(
-                state: \.topAiringState,
-                action: MainSearchReducer.Action.topAiring
+        VStack {
+            Text("Top Airing")
+                .font(.system(.title))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundStyle(.white)
+            
+            HorizontalListView(
+                store: store.scope(
+                    state: \.topAiringState,
+                    action: MainSearchReducer.Action.topAiring
+                )
             )
-        )
+        }
     }
     
     @ViewBuilder
     private var recentEpisodes: some View {
-        
-        Text("Recent episodes")
-            .font(.system(.title))
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .foregroundStyle(.white)
-        
-        
-        HorizontalListView(
-            store: store.scope(
-                state: \.recentEpisodes,
-                action: MainSearchReducer.Action.recentEpisodes
+        VStack {
+            Text("Recent episodes")
+                .font(.system(.title))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundStyle(.white)
+            
+            
+            HorizontalListView(
+                store: store.scope(
+                    state: \.recentEpisodes,
+                    action: MainSearchReducer.Action.recentEpisodes
+                )
             )
-        )
+        }
     }
     
     @ViewBuilder
     private var recenlyVisited: some View {
-        Text("Recently visited")
-            .font(.system(.title))
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .foregroundStyle(.white)
         
-        RecentlyVisitedView(
-            store: store.scope(
-                state: \.recentlyVisited,
-                action: MainSearchReducer.Action.recentlyVisited
+        VStack {
+            Text("Recently visited")
+                .font(.system(.title))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundStyle(.white)
+            
+            RecentlyVisitedView(
+                store: store.scope(
+                    state: \.recentlyVisited,
+                    action: MainSearchReducer.Action.recentlyVisited
+                )
             )
-        )
+        }
     }
 }
 

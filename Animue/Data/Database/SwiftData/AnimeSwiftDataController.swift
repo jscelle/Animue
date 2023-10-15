@@ -9,7 +9,7 @@ import Dependencies
 import SwiftData
 import Foundation
 
-final actor SwiftDataController {
+final actor AnimeSwiftDataController {
     
     let context: ModelContext
     

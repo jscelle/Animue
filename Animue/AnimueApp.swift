@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import AVKit
 
 @main
 struct animueApp: App {
